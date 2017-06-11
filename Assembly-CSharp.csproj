@@ -107,6 +107,7 @@
      <Compile Include="Assets\Packages\ProCamera2D\Code\Triggers\ProCamera2DTriggerRails.cs" />
      <Compile Include="Assets\Packages\ProCamera2D\Code\Triggers\ProCamera2DTriggerZoom.cs" />
      <Compile Include="Assets\Packages\ProCamera2D\ProCamera2D.cs" />
+     <Compile Include="Assets\Scripts\PaddleController.cs" />
      <None Include="Assets\Packages\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Circle.shader" />
      <None Include="Assets\Packages\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Wipe.shader" />
      <None Include="Assets\Packages\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Texture.shader" />
