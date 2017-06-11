@@ -23,6 +23,11 @@ public class BallController : MonoBehaviour {
 
 	void DetachFromPaddle ()
 	{
-		print("detached from paddle");
+		attachedToPaddle = false;
+		transform.parent = null;
+		rb.bodyType = RigidbodyType2D.Dynamic;
+
+		Vector2 force = new Vector2(1, 1);
+		rb.AddForce(force * speed, ForceMode2D.Impulse);
 	}
 }
