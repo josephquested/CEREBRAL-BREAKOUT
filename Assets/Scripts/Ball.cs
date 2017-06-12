@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour {
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		paddle = transform.parent.gameObject;
 	}
 
   void Update ()
@@ -16,16 +17,43 @@ public class Ball : MonoBehaviour {
     ClampBallVelocity();
   }
 
+	// POP //
+
+	Animator anim;
+
+	public float popDelay;
+
+	IEnumerator PopRoutine ()
+	{
+		anim.SetTrigger("Pop");
+		yield return new WaitForSeconds(popDelay);
+		AttachToPaddle();
+	}
+
 	// PADDLE INTERACTION //
+
+	GameObject paddle;
 
 	bool attachedToPaddle = true;
 
-	public void ReceiveFire ()
+	public void ReceiveRelease ()
 	{
 		if (attachedToPaddle)
 		{
 			DetachFromPaddle();
 		}
+		else
+		{
+			StartCoroutine(PopRoutine());
+		}
+	}
+
+	void AttachToPaddle ()
+	{
+		attachedToPaddle = true;
+		transform.parent = paddle.transform;
+		transform.position = new Vector2(paddle.transform.position.x, 0.25f);
+		rb.bodyType = RigidbodyType2D.Kinematic;
 	}
 
 	void DetachFromPaddle ()
@@ -33,13 +61,13 @@ public class Ball : MonoBehaviour {
 		attachedToPaddle = false;
 		transform.parent = null;
 		rb.bodyType = RigidbodyType2D.Dynamic;
-		InheritPaddleVelocity(GameObject.FindWithTag("Paddle"));
+		rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+		InheritPaddleVelocity();
 	}
 
-	void InheritPaddleVelocity (GameObject paddle)
+	void InheritPaddleVelocity ()
 	{
-		Rigidbody2D paddleRb = paddle.GetComponent<Rigidbody2D>();
-		rb.velocity += paddleRb.velocity;
+		rb.velocity += paddle.GetComponent<Rigidbody2D>().velocity;
 	}
 
 	// MOVEMENT //
@@ -59,9 +87,9 @@ public class Ball : MonoBehaviour {
   {
 		GameObject obj = collision.gameObject;
 
-    if (obj.tag == "Paddle" && !attachedToPaddle)
+    if (obj == paddle && !attachedToPaddle)
     {
-      InheritPaddleVelocity(obj);
+      InheritPaddleVelocity();
     }
 
 		if (obj.tag == "Brick")

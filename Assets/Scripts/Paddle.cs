@@ -19,7 +19,7 @@ public class Paddle : MonoBehaviour {
 
 	void Update ()
 	{
-		UpdateBash();
+		UpdateRelease();
 	}
 
 	// MOVEMENT //
@@ -38,19 +38,11 @@ public class Paddle : MonoBehaviour {
 
 	Ball ball;
 
-	public float bashForce;
-
-	void UpdateBash ()
+	void UpdateRelease ()
 	{
-		if (Input.GetButtonDown("Bash"))
+		if (Input.GetButtonDown("Release"))
 		{
-			Bash();
+			ball.ReceiveRelease();
 		}
-	}
-
-	void Bash ()
-	{
-		rb.AddForce(Vector2.up * bashForce, ForceMode2D.Impulse);
-		ball.ReceiveFire();
 	}
 }
