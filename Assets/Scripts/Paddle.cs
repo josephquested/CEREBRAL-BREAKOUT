@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PaddleController : MonoBehaviour {
+public class Paddle : MonoBehaviour {
 
 	// SYSTEM //
 
