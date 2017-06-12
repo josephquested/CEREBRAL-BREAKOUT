@@ -16,6 +16,13 @@ public class Brick : MonoBehaviour {
 
   }
 
+	// BALL INTERACTION //
+
+	public void ReceiveHit ()
+	{
+		Destroy(gameObject);
+	}
+
 	// MOVEMENT //
 
 	Rigidbody2D rb;

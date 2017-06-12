@@ -58,9 +58,16 @@ public class Ball : MonoBehaviour {
 
   void OnCollisionEnter2D (Collision2D collision)
   {
-    if (collision.gameObject.tag == "Paddle" && !attachedToPaddle)
+		GameObject obj = collision.gameObject;
+
+    if (obj.tag == "Paddle" && !attachedToPaddle)
     {
-      InheritPaddleVelocity(collision.gameObject);
+      InheritPaddleVelocity(obj);
     }
+
+		if (obj.tag == "Brick")
+		{
+			obj.GetComponent<Brick>().ReceiveHit();
+		}
   }
 }
