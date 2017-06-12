@@ -33,7 +33,7 @@ public class Ball : MonoBehaviour {
 		attachedToPaddle = false;
 		transform.parent = null;
 		rb.bodyType = RigidbodyType2D.Dynamic;
-		rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+		// rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
 		InheritPaddleVelocity(GameObject.FindWithTag("Paddle"));
 	}
 

@@ -21,6 +21,12 @@ public class Brick : MonoBehaviour {
 
 	public void ReceiveHit ()
 	{
+		StartCoroutine(DestroyRoutine());
+	}
+
+	IEnumerator DestroyRoutine ()
+	{
+		yield return new WaitForSeconds(0.1f);
 		Destroy(gameObject);
 	}
 
