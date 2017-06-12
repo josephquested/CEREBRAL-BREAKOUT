@@ -13,6 +13,14 @@ public class BallController : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 	}
 
+  void Update ()
+  {
+    if (!attachedToPaddle)
+    {
+      ClampBallVelocity();
+    }
+  }
+
 	public void ReceiveFire ()
 	{
 		if (attachedToPaddle)
@@ -35,6 +43,11 @@ public class BallController : MonoBehaviour {
   {
     Rigidbody2D paddleRb = paddle.GetComponent<Rigidbody2D>();
     rb.velocity += paddleRb.velocity;
+  }
+
+  void ClampBallVelocity ()
+  {
+    rb.velocity = speed * (rb.velocity.normalized);
   }
 
   void OnCollisionEnter2D (Collision2D collision)
