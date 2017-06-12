@@ -30,4 +30,18 @@ public class BallController : MonoBehaviour {
 		Vector2 force = new Vector2(1, 1);
 		rb.AddForce(force * speed, ForceMode2D.Impulse);
 	}
+
+  void ReceivePaddleVelocity (GameObject paddle)
+  {
+    Rigidbody2D paddleRb = paddle.GetComponent<Rigidbody2D>();
+    rb.velocity += paddleRb.velocity;
+  }
+
+  void OnCollisionEnter2D (Collision2D collision)
+  {
+    if (collision.gameObject.tag == "Paddle" && !attachedToPaddle)
+    {
+      ReceivePaddleVelocity(collision.gameObject);
+    }
+  }
 }
