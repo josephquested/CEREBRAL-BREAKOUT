@@ -9,6 +9,7 @@ public class Brick : MonoBehaviour {
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		RandomizeGravityScale();
 	}
 
   void Update ()
@@ -27,6 +28,11 @@ public class Brick : MonoBehaviour {
 
 	Rigidbody2D rb;
 
-	public float speed;
+	public float gravityMin;
+	public float gravityMax;
 
+	void RandomizeGravityScale ()
+	{
+		rb.gravityScale = (Random.Range(gravityMin, gravityMax));
+	}
 }
