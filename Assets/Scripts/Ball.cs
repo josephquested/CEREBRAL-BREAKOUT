@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour {
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator>();
 		paddle = transform.parent.gameObject;
 	}
 
@@ -21,12 +22,16 @@ public class Ball : MonoBehaviour {
 
 	Animator anim;
 
+	bool canPop;
 	public float popDelay;
 
 	IEnumerator PopRoutine ()
 	{
+		canPop = false;
+		GetComponent<Collider2D>().enabled = false;
 		anim.SetTrigger("Pop");
 		yield return new WaitForSeconds(popDelay);
+		rb.velocity = Vector2.zero;
 		AttachToPaddle();
 	}
 
@@ -42,7 +47,7 @@ public class Ball : MonoBehaviour {
 		{
 			DetachFromPaddle();
 		}
-		else
+		else if (!attachedToPaddle && canPop)
 		{
 			StartCoroutine(PopRoutine());
 		}
@@ -52,17 +57,20 @@ public class Ball : MonoBehaviour {
 	{
 		attachedToPaddle = true;
 		transform.parent = paddle.transform;
-		transform.position = new Vector2(paddle.transform.position.x, 0.25f);
+		transform.position = new Vector2(paddle.transform.position.x, paddle.transform.position.y + 0.25f);
+		GetComponent<Collider2D>().enabled = true;
 		rb.bodyType = RigidbodyType2D.Kinematic;
+		anim.SetTrigger("Idle");
 	}
 
 	void DetachFromPaddle ()
 	{
+		canPop = true;
 		attachedToPaddle = false;
 		transform.parent = null;
 		rb.bodyType = RigidbodyType2D.Dynamic;
-		rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
 		InheritPaddleVelocity();
+		rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
 	}
 
 	void InheritPaddleVelocity ()
