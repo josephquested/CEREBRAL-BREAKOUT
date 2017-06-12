@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour {
 
-	Rigidbody2D rb;
-	bool attachedToPaddle = true;
-	public float speed;
+	// SYSTEM //
 
 	void Start ()
 	{
@@ -15,11 +13,12 @@ public class BallController : MonoBehaviour {
 
   void Update ()
   {
-    if (!attachedToPaddle)
-    {
-      ClampBallVelocity();
-    }
+    ClampBallVelocity();
   }
+
+	// PADDLE INTERACTION //
+
+	bool attachedToPaddle = true;
 
 	public void ReceiveFire ()
 	{
@@ -34,26 +33,34 @@ public class BallController : MonoBehaviour {
 		attachedToPaddle = false;
 		transform.parent = null;
 		rb.bodyType = RigidbodyType2D.Dynamic;
-    rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
-    ReceivePaddleVelocity(GameObject.FindWithTag("Paddle"));
+		rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+		InheritPaddleVelocity(GameObject.FindWithTag("Paddle"));
 	}
 
-  void ReceivePaddleVelocity (GameObject paddle)
-  {
-    Rigidbody2D paddleRb = paddle.GetComponent<Rigidbody2D>();
-    rb.velocity += paddleRb.velocity;
-  }
+	void InheritPaddleVelocity (GameObject paddle)
+	{
+		Rigidbody2D paddleRb = paddle.GetComponent<Rigidbody2D>();
+		rb.velocity += paddleRb.velocity;
+	}
 
-  void ClampBallVelocity ()
-  {
-    rb.velocity = speed * (rb.velocity.normalized);
-  }
+	// MOVEMENT //
+
+	Rigidbody2D rb;
+
+	public float speed;
+
+	void ClampBallVelocity ()
+	{
+		rb.velocity = speed * (rb.velocity.normalized);
+	}
+
+	// COLLISION //
 
   void OnCollisionEnter2D (Collision2D collision)
   {
     if (collision.gameObject.tag == "Paddle" && !attachedToPaddle)
     {
-      ReceivePaddleVelocity(collision.gameObject);
+      InheritPaddleVelocity(collision.gameObject);
     }
   }
 }

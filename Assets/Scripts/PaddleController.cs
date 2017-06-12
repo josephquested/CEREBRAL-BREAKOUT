@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PaddleController : MonoBehaviour {
 
-	Rigidbody2D rb;
-	BallController ballController;
-	public float speed;
+	// SYSTEM //
 
 	void Start ()
 	{
@@ -24,11 +22,21 @@ public class PaddleController : MonoBehaviour {
 		UpdateFire();
 	}
 
+	// MOVEMENT //
+
+	Rigidbody2D rb;
+
+	public float speed;
+
 	void UpdateMovement ()
 	{
 		Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
 		rb.AddForce(movement * speed);
 	}
+
+	// BALL INTERACTION //
+
+	BallController ballController;
 
 	void UpdateFire ()
 	{
