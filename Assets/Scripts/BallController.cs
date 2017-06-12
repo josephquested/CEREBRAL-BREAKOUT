@@ -34,9 +34,8 @@ public class BallController : MonoBehaviour {
 		attachedToPaddle = false;
 		transform.parent = null;
 		rb.bodyType = RigidbodyType2D.Dynamic;
-
-		Vector2 force = new Vector2(1, 1);
-		rb.AddForce(force * speed, ForceMode2D.Impulse);
+    rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+    ReceivePaddleVelocity(GameObject.FindWithTag("Paddle"));
 	}
 
   void ReceivePaddleVelocity (GameObject paddle)
