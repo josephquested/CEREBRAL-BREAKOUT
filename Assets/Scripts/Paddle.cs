@@ -9,7 +9,7 @@ public class Paddle : MonoBehaviour {
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		ballController = GetComponentInChildren<BallController>();
+		ball = GetComponentInChildren<Ball>();
 	}
 
 	void FixedUpdate ()
@@ -36,13 +36,13 @@ public class Paddle : MonoBehaviour {
 
 	// BALL INTERACTION //
 
-	BallController ballController;
+	Ball ball;
 
 	void UpdateFire ()
 	{
 		if (Input.GetButtonDown("Fire"))
 		{
-			ballController.ReceiveFire();
+			ball.ReceiveFire();
 		}
 	}
 }
