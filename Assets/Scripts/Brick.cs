@@ -10,6 +10,7 @@ public class Brick : MonoBehaviour {
 	{
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
+		audioSource = GetComponent<AudioSource>();
 		RandomizeGravityScale();
 	}
 
@@ -30,9 +31,27 @@ public class Brick : MonoBehaviour {
 	{
 		GetComponent<Collider2D>().enabled = false;
 		anim.SetTrigger("Pop");
-		audioSource.Play();
+		PlayPopAudio();
 		yield return new WaitForSeconds(popDelay);
 		Destroy(gameObject);
+	}
+
+	// AUDIO //
+
+	AudioSource audioSource;
+
+	public AudioClip popClip;
+
+	void RandomisePitch (float min, float max)
+	{
+		audioSource.pitch = Random.Range(min, max);
+	}
+
+	void PlayPopAudio ()
+	{
+		audioSource.clip = popClip;
+		RandomisePitch(0.8f, 1.2f);
+		audioSource.Play();
 	}
 
 	// MOVEMENT //
