@@ -9,6 +9,7 @@ public class Paddle : MonoBehaviour {
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		audioSource = GetComponent<AudioSource>();
 		ball = GetComponentInChildren<Ball>();
 	}
 
@@ -45,4 +46,32 @@ public class Paddle : MonoBehaviour {
 			ball.ReceiveRelease();
 		}
 	}
+
+	// AUDIO //
+
+	AudioSource audioSource;
+
+	public AudioClip bounceClip;
+
+	void RandomisePitch (float min, float max)
+	{
+		audioSource.pitch = Random.Range(min, max);
+	}
+
+	void PlayBounceAudio ()
+	{
+		audioSource.clip = bounceClip;
+		RandomisePitch(0.8f, 1f);
+		audioSource.Play();
+	}
+
+	// COLLISION //
+
+	void OnCollisionEnter2D (Collision2D collision)
+  {
+		if (collision.gameObject.tag == "Boundary")
+		{
+			PlayBounceAudio();
+		}
+  }
 }
