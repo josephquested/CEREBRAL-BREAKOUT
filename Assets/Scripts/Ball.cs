@@ -10,6 +10,7 @@ public class Ball : MonoBehaviour {
 	{
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
+		audioSource = GetComponent<AudioSource>();
 		paddle = transform.parent.gameObject;
 	}
 
@@ -30,6 +31,7 @@ public class Ball : MonoBehaviour {
 		canPop = false;
 		GetComponent<Collider2D>().enabled = false;
 		anim.SetTrigger("Pop");
+		PlayPopAudio();
 		yield return new WaitForSeconds(popDelay);
 		rb.velocity = Vector2.zero;
 		AttachToPaddle();
@@ -89,11 +91,38 @@ public class Ball : MonoBehaviour {
 		rb.velocity = speed * (rb.velocity.normalized);
 	}
 
+	// AUDIO //
+
+	AudioSource audioSource;
+
+	public AudioClip bounceClip;
+	public AudioClip popClip;
+
+	void RandomisePitch (float min, float max)
+	{
+		audioSource.pitch = Random.Range(min, max);
+	}
+
+	void PlayBounceAudio ()
+	{
+		audioSource.clip = bounceClip;
+		RandomisePitch(0.75f, 1f);
+		audioSource.Play();
+	}
+
+	void PlayPopAudio ()
+	{
+		audioSource.clip = popClip;
+		RandomisePitch(0.8f, 1.2f);
+		audioSource.Play();
+	}
+
 	// COLLISION //
 
   void OnCollisionEnter2D (Collision2D collision)
   {
 		GameObject obj = collision.gameObject;
+		PlayBounceAudio();
 
     if (obj == paddle && !attachedToPaddle)
     {
