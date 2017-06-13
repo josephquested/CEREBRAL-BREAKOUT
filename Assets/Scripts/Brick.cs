@@ -9,24 +9,29 @@ public class Brick : MonoBehaviour {
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator>();
 		RandomizeGravityScale();
 	}
-
-  void Update ()
-  {
-
-  }
 
 	// BALL INTERACTION //
 
 	public void ReceiveHit ()
 	{
-		StartCoroutine(DestroyRoutine());
+		StartCoroutine(PopRoutine());
 	}
 
-	IEnumerator DestroyRoutine ()
+	// POP //
+
+	Animator anim;
+
+	public float popDelay;
+
+	IEnumerator PopRoutine ()
 	{
-		yield return new WaitForSeconds(0.1f);
+		GetComponent<Collider2D>().enabled = false;
+		anim.SetTrigger("Pop");
+		audioSource.Play();
+		yield return new WaitForSeconds(popDelay);
 		Destroy(gameObject);
 	}
 
