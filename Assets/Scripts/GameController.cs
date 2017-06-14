@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
@@ -13,7 +14,7 @@ public class GameController : MonoBehaviour {
 
 	void Update ()
 	{
-
+		UpdateScoreText();
 	}
 
 	// LIFE //
@@ -35,6 +36,16 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	// SCORE //
+
+	public int score = 0;
+	public Text scoreField;
+
+	void UpdateScoreText ()
+	{
+		scoreField.text = score.ToString();
+	}
+
 	// HEART ICONS //
 
 	public GameObject[] heartIcons;
@@ -47,7 +58,7 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	// GAME //
+	// GAME OVER //
 
 	void GameOver ()
 	{

@@ -24,8 +24,8 @@ public class GameOverController : MonoBehaviour {
 
 	public void InitGameOver ()
 	{
-		gameIsOver = true;
 		GetComponent<Animator>().SetTrigger("GameOver");
+		gameIsOver = true;
 	}
 
 	// ENTER INPUT //
