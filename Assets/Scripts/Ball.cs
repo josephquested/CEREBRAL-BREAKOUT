@@ -133,5 +133,12 @@ public class Ball : MonoBehaviour {
 		{
 			obj.GetComponent<Brick>().ReceiveHit();
 		}
+
+		if (obj.tag == "BottomBoundary")
+		{
+			rb.velocity = Vector2.zero;
+			StartCoroutine(PopRoutine());
+			GameObject.FindWithTag("GameController").GetComponent<GameController>().LoseLife();
+		}
   }
 }
