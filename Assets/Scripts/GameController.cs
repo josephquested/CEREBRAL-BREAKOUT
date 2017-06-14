@@ -49,8 +49,10 @@ public class GameController : MonoBehaviour {
 
 	// GAME //
 
+	public GameObject gameoverUI;
+
 	void GameOver ()
 	{
-		print("game over");
+		gameoverUI.GetComponent<Animator>().SetTrigger("GameOver");
 	}
 }
