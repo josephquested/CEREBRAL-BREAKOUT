@@ -27,13 +27,60 @@ public class GameOverController : MonoBehaviour {
 	// INPUT //
 
 	public Text[] nameFields;
-	public int nameFieldIndex = 0;
+	public Text selectedField;
+	public int selectorIndex = 0;
 
 	void UpdateHorizontalInput ()
 	{
 		if (Input.GetButtonDown("Horizontal"))
 		{
-			print(Input.GetAxisRaw("Horizontal"));
+			UnselectCurrentField();
+			if (Input.GetAxisRaw("Horizontal") < 0)
+			{
+				MoveSelectorLeft();
+			}
+			else
+			{
+				MoveSelectorRight();
+			}
+			SelectNewField();
 		}
+	}
+
+	// SELECTOR //
+
+	void MoveSelectorRight ()
+	{
+		if (selectorIndex >= 3)
+		{
+			selectorIndex = 0;
+		}
+		else
+		{
+			selectorIndex++;
+		}
+	}
+
+	void MoveSelectorLeft ()
+	{
+		if (selectorIndex <= 0)
+		{
+			selectorIndex = 3;
+		}
+		else
+		{
+			selectorIndex--;
+		}
+	}
+
+	void UnselectCurrentField ()
+	{
+		selectedField.color = Color.black;
+	}
+
+	void SelectNewField ()
+	{
+		selectedField = nameFields[selectorIndex];
+		selectedField.color = Color.white;
 	}
 }
