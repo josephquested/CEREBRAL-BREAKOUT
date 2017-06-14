@@ -32,6 +32,7 @@ public class Brick : MonoBehaviour {
 		GetComponent<Collider2D>().enabled = false;
 		anim.SetTrigger("Pop");
 		PlayPopAudio();
+		GameObject.FindWithTag("GameController").GetComponent<GameController>().ReceiveScorePoint(1);
 		yield return new WaitForSeconds(popDelay);
 		Destroy(gameObject);
 	}

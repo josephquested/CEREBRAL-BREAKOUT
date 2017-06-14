@@ -41,6 +41,11 @@ public class GameController : MonoBehaviour {
 	public int score = 0;
 	public Text scoreField;
 
+	public void ReceiveScorePoint (int quantity)
+	{
+		score += quantity;
+	}
+
 	void UpdateScoreText ()
 	{
 		scoreField.text = score.ToString();
