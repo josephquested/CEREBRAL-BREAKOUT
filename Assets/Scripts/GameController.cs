@@ -40,6 +40,7 @@ public class GameController : MonoBehaviour {
 
 	public int score = 0;
 	public Text scoreField;
+	public Text finalScoreField;
 
 	public void ReceiveScorePoint (int quantity)
 	{
@@ -49,6 +50,7 @@ public class GameController : MonoBehaviour {
 	void UpdateScoreText ()
 	{
 		scoreField.text = score.ToString();
+		finalScoreField.text = score.ToString();
 	}
 
 	// HEART ICONS //
