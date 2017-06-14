@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -7,22 +8,33 @@ public class GameOverController : MonoBehaviour {
 
 	// SYSTEM //
 
-	void Start ()
-	{
-
-	}
-
 	void Update ()
 	{
-		UpdateHorizontalInput();
-		UpdateVerticalInput();
+		if (gameIsOver)
+		{
+			UpdateHorizontalInput();
+			UpdateVerticalInput();
+			UpdateEnterInput();
+		}
 	}
 
 	// GAME OVER //
 
+	bool gameIsOver;
+
 	public void InitGameOver ()
 	{
+		gameIsOver = true;
 		GetComponent<Animator>().SetTrigger("GameOver");
+	}
+
+	// ENTER INPUT //
+	void UpdateEnterInput ()
+	{
+		if (Input.GetButtonDown("Submit") && selectorIndex == 3)
+		{
+			SceneManager.LoadScene("Menu");
+		}
 	}
 
 	// HORIZONTAL INPUT //

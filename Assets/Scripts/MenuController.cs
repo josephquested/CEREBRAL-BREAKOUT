@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class MenuController : MonoBehaviour {
@@ -22,7 +23,16 @@ public class MenuController : MonoBehaviour {
 	{
 		if (Input.GetButtonDown("Submit"))
 		{
-			print("lets play");
+			StartCoroutine(InsertCoinRoutine());
 		}
+	}
+
+	// START GAME //
+
+	IEnumerator InsertCoinRoutine ()
+	{
+		GetComponent<AudioSource>().Play();
+		yield return new WaitForSeconds(0.4f);
+		SceneManager.LoadScene("Main");
 	}
 }
