@@ -6,9 +6,9 @@ public class GameController : MonoBehaviour {
 
 	// SYSTEM //
 
-	void Start ()
+	void Awake ()
 	{
-
+		Cursor.visible = false;
 	}
 
 	void Update ()

@@ -65,4 +65,18 @@ public class Brick : MonoBehaviour {
 	{
 		rb.gravityScale = (Random.Range(gravityMin, gravityMax));
 	}
+
+	// COLLISION //
+
+  void OnCollisionEnter2D (Collision2D collision)
+  {
+		GameObject obj = collision.gameObject;
+
+		if (obj.tag == "BottomBoundary")
+		{
+			rb.velocity = Vector2.zero;
+			StartCoroutine(PopRoutine());
+			GameObject.FindWithTag("GameController").GetComponent<GameController>().LoseLife();
+		}
+  }
 }
