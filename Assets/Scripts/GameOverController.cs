@@ -15,6 +15,7 @@ public class GameOverController : MonoBehaviour {
 	void Update ()
 	{
 		UpdateHorizontalInput();
+		UpdateVerticalInput();
 	}
 
 	// GAME OVER //
@@ -24,11 +25,12 @@ public class GameOverController : MonoBehaviour {
 		GetComponent<Animator>().SetTrigger("GameOver");
 	}
 
-	// INPUT //
+	// HORIZONTAL INPUT //
+
+	int selectorIndex = 0;
 
 	public Text[] nameFields;
 	public Text selectedField;
-	public int selectorIndex = 0;
 
 	void UpdateHorizontalInput ()
 	{
@@ -82,5 +84,55 @@ public class GameOverController : MonoBehaviour {
 	{
 		selectedField = nameFields[selectorIndex];
 		selectedField.color = Color.white;
+	}
+
+	// VERTICAL INPUT //
+
+	public string[] chars = new string[] {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+	public int[] charIndexes = new int[] {0, 18, 18};
+
+	void UpdateVerticalInput ()
+	{
+		if (Input.GetButtonDown("Vertical") && selectorIndex != 3)
+		{
+			if (Input.GetAxisRaw("Vertical") < 0)
+			{
+				MoveCharDown();
+			}
+			else
+			{
+				MoveCharUp();
+			}
+			ChangeSelectedChar();
+		}
+	}
+
+	void MoveCharUp ()
+	{
+		if (charIndexes[selectorIndex] >= 25)
+		{
+			charIndexes[selectorIndex] = 0;
+		}
+		else
+		{
+			charIndexes[selectorIndex]++;
+		}
+	}
+
+	void MoveCharDown ()
+	{
+		if (charIndexes[selectorIndex] <= 0)
+		{
+			charIndexes[selectorIndex] = 25;
+		}
+		else
+		{
+			charIndexes[selectorIndex]--;
+		}
+	}
+
+	void ChangeSelectedChar ()
+	{
+		nameFields[selectorIndex].text = chars[charIndexes[selectorIndex]];
 	}
 }
