@@ -112,6 +112,7 @@
      <Compile Include="Assets\Scripts\BrickController.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GameOverController.cs" />
+     <Compile Include="Assets\Scripts\MenuController.cs" />
      <Compile Include="Assets\Scripts\Paddle.cs" />
      <None Include="Assets\Packages\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Circle.shader" />
      <None Include="Assets\Packages\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Wipe.shader" />
