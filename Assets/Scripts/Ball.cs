@@ -6,8 +6,11 @@ public class Ball : MonoBehaviour {
 
 	// SYSTEM //
 
+	GameController gameController;
+
 	void Start ()
 	{
+		gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
 		audioSource = GetComponent<AudioSource>();
@@ -69,7 +72,7 @@ public class Ball : MonoBehaviour {
 	{
 		canPop = true;
 		attachedToPaddle = false;
-		transform.parent = null;
+		transform.parent = gameController.transform;
 		rb.bodyType = RigidbodyType2D.Dynamic;
 		InheritPaddleVelocity();
 		rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
@@ -138,7 +141,7 @@ public class Ball : MonoBehaviour {
 		{
 			rb.velocity = Vector2.zero;
 			StartCoroutine(PopRoutine());
-			GameObject.FindWithTag("GameController").GetComponent<GameController>().LoseLife();
+			gameController.LoseLife();
 		}
   }
 }

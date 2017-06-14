@@ -70,5 +70,6 @@ public class GameController : MonoBehaviour {
 	void GameOver ()
 	{
 		GameObject.FindWithTag("GameOverController").GetComponent<GameOverController>().InitGameOver();
+		Destroy(gameObject);
 	}
 }
