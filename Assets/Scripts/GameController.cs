@@ -49,10 +49,8 @@ public class GameController : MonoBehaviour {
 
 	// GAME //
 
-	public GameObject gameoverUI;
-
 	void GameOver ()
 	{
-		gameoverUI.GetComponent<Animator>().SetTrigger("GameOver");
+		GameObject.FindWithTag("GameOverController").GetComponent<GameOverController>().InitGameOver();
 	}
 }
