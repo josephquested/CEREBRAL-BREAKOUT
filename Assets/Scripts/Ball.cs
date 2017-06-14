@@ -129,7 +129,7 @@ public class Ball : MonoBehaviour {
       InheritPaddleVelocity();
     }
 
-		if (obj.tag == "Brick")
+		if (obj.tag == "Brick" && !attachedToPaddle)
 		{
 			obj.GetComponent<Brick>().ReceiveHit();
 		}
