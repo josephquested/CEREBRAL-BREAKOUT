@@ -17,6 +17,7 @@ public class Explode : MonoBehaviour {
 
 	IEnumerator ExplodeRoutine ()
 	{
+		GameObject.FindWithTag("Effects").GetComponent<Effects>().Hit();
 		yield return new WaitForSeconds(lifetime);
 		Destroy(gameObject);
 	}

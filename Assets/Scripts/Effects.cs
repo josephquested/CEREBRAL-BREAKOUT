@@ -10,20 +10,24 @@ public class Effects : MonoBehaviour {
 	void Start ()
 	{
 		backgroundAnim = GameObject.FindWithTag("Background").GetComponent<Animator>();
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	// EFFECTS //
 
 	Animator backgroundAnim;
+	AudioSource audioSource;
 
 	public void Hit ()
 	{
+		audioSource.Play();
 		ProCamera2DShake.Instance.Shake("SmallExplosion");
 		backgroundAnim.SetTrigger("Flash");
 	}
 
 	public void Death ()
 	{
+		audioSource.Play();
 		ProCamera2DShake.Instance.Shake("LargeExplosion");
 		backgroundAnim.SetTrigger("Death");
 	}
