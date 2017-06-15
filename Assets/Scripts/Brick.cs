@@ -77,7 +77,11 @@ public class Brick : MonoBehaviour {
 		{
 			rb.velocity = Vector2.zero;
 			StartCoroutine(PopRoutine());
-			GameObject.FindWithTag("GameController").GetComponent<GameController>().LoseLife();
+			
+			if (GameObject.FindWithTag("GameController") != null)
+			{
+				GameObject.FindWithTag("GameController").GetComponent<GameController>().LoseLife
+			}
 		}
 
 		if (obj.tag == "TopBoundary")

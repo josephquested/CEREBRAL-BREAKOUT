@@ -6,8 +6,6 @@ public class BrickController : MonoBehaviour {
 
 	// SYSTEM //
 
-	public GameObject brickPrefab;
-
 	void Start ()
 	{
 		StartCoroutine(SpawnRoutine());
@@ -20,10 +18,31 @@ public class BrickController : MonoBehaviour {
 
 	// SPAWNING //
 
-	public float spawnRate;
+	public GameObject brickPrefab;
+	public float spawnDelay;
 
 	IEnumerator SpawnRoutine ()
 	{
-		yield return null;
+		SpawnBrickRow();
+		yield return new WaitForSeconds(spawnDelay);
+		StartCoroutine(SpawnRoutine());
+	}
+
+	void SpawnBrickRow ()
+	{
+		SpawnBrickAtPosition(-7);
+		SpawnBrickAtPosition(-5);
+		SpawnBrickAtPosition(-3);
+		SpawnBrickAtPosition(-1);
+		SpawnBrickAtPosition(1);
+		SpawnBrickAtPosition(3);
+		SpawnBrickAtPosition(5);
+		SpawnBrickAtPosition(7);
+	}
+
+	void SpawnBrickAtPosition (float xPos)
+	{
+		Vector2 position = new Vector2(xPos, 10f);
+		Instantiate(brickPrefab, position, transform.rotation);
 	}
 }
