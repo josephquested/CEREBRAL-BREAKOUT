@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
+using System;
 
 public class GameOverController : MonoBehaviour {
 
 	// SYSTEM //
+
+	void Start ()
+	{
+		SaveHighScore();
+	}
 
 	void Update ()
 	{
@@ -31,12 +37,29 @@ public class GameOverController : MonoBehaviour {
 		gameIsOver = true;
 	}
 
+	// HIGH SCORE //
+
+	public Text finalScoreField;
+
+	void SaveHighScore ()
+	{
+		int finalScore = Convert.ToInt32(finalScoreField.text);
+		int oldHighscore = PlayerPrefs.GetInt("High Score");
+
+		if (finalScore >= oldHighscore)
+		{
+			PlayerPrefs.SetInt("High Score", finalScore);
+			PlayerPrefs.SetString("Player Name", nameFields[0].text + nameFields[1].text + nameFields[2].text);
+		}
+	}
+
 	// ENTER AND ESC INPUT //
 
 	void UpdateEnterInput ()
 	{
 		if (Input.GetButtonDown("Submit") && selectorIndex == 3)
 		{
+			SaveHighScore();
 			SceneManager.LoadScene("Menu");
 		}
 	}
