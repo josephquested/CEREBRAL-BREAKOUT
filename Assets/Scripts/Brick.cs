@@ -72,7 +72,7 @@ public class Brick : MonoBehaviour {
 
 	// COLLISION //
 
-  void OnCollisionEnter2D (Collision2D collision)
+  public virtual void OnCollisionEnter2D (Collision2D collision)
   {
 		GameObject obj = collision.gameObject;
 
