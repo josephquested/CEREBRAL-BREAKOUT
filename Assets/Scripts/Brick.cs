@@ -6,7 +6,7 @@ public class Brick : MonoBehaviour {
 
 	// SYSTEM //
 
-	GameController gameController;
+	protected GameController gameController;
 
 	void Start ()
 	{
@@ -26,11 +26,11 @@ public class Brick : MonoBehaviour {
 
 	// POP //
 
-	Animator anim;
+	protected Animator anim;
 
 	public float popDelay;
 
-	IEnumerator PopRoutine ()
+	public virtual IEnumerator PopRoutine ()
 	{
 		PlayPopAudio();
 		anim.SetTrigger("Pop");
@@ -51,7 +51,7 @@ public class Brick : MonoBehaviour {
 		audioSource.pitch = Random.Range(min, max);
 	}
 
-	void PlayPopAudio ()
+	protected void PlayPopAudio ()
 	{
 		audioSource.clip = popClip;
 		RandomisePitch(0.8f, 1.2f);

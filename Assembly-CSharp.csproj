@@ -114,6 +114,7 @@
      <Compile Include="Assets\Scripts\GameOverController.cs" />
      <Compile Include="Assets\Scripts\MenuController.cs" />
      <Compile Include="Assets\Scripts\Paddle.cs" />
+     <Compile Include="Assets\Scripts\ToughBrick.cs" />
      <None Include="Assets\Packages\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Circle.shader" />
      <None Include="Assets\Packages\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Wipe.shader" />
      <None Include="Assets\Packages\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Texture.shader" />
