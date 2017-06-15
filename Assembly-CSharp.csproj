@@ -110,6 +110,7 @@
      <Compile Include="Assets\Scripts\Ball.cs" />
      <Compile Include="Assets\Scripts\Brick.cs" />
      <Compile Include="Assets\Scripts\BrickController.cs" />
+     <Compile Include="Assets\Scripts\Explode.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GameOverController.cs" />
      <Compile Include="Assets\Scripts\MenuController.cs" />
