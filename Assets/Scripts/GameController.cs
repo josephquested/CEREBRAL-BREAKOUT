@@ -7,9 +7,12 @@ public class GameController : MonoBehaviour {
 
 	// SYSTEM //
 
+	Effects effects;
+
 	void Awake ()
 	{
 		Cursor.visible = false;
+		effects = GameObject.FindWithTag("Effects").GetComponent<Effects>();
 	}
 
 	void Update ()
@@ -25,6 +28,7 @@ public class GameController : MonoBehaviour {
 	{
 		DestroyHeartIcon(lifeCount);
 		lifeCount--;
+		effects.Hit();
 		CheckForGameOver();
 	}
 
@@ -69,7 +73,7 @@ public class GameController : MonoBehaviour {
 
 	IEnumerator GameOverRoutine ()
 	{
-		GameObject.FindWithTag("Background").GetComponent<Animator>().SetTrigger("Death");
+		effects.Death();
 		GameObject.FindWithTag("GameOverController").GetComponent<GameOverController>().InitGameOver();
 		yield return new WaitForSeconds(0.5f);
 		Destroy(gameObject);
