@@ -79,5 +79,10 @@ public class Brick : MonoBehaviour {
 			StartCoroutine(PopRoutine());
 			GameObject.FindWithTag("GameController").GetComponent<GameController>().LoseLife();
 		}
+
+		if (obj.tag == "TopBoundary")
+    {
+      Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+    }
   }
 }

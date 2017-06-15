@@ -20,6 +20,8 @@ public class BrickController : MonoBehaviour {
 
 	// SPAWNING //
 
+	public float spawnRate;
+
 	IEnumerator SpawnRoutine ()
 	{
 		yield return null;
