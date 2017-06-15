@@ -19,6 +19,7 @@ public class BrickController : MonoBehaviour {
 	// SPAWNING //
 
 	public GameObject brickPrefab;
+	public GameObject toughBrickPrefab;
 	public float spawnDelay;
 
 	IEnumerator SpawnRoutine ()
@@ -30,19 +31,33 @@ public class BrickController : MonoBehaviour {
 
 	void SpawnBrickRow ()
 	{
-		SpawnBrickAtPosition(-7);
-		SpawnBrickAtPosition(-5);
-		SpawnBrickAtPosition(-3);
-		SpawnBrickAtPosition(-1);
-		SpawnBrickAtPosition(1);
-		SpawnBrickAtPosition(3);
-		SpawnBrickAtPosition(5);
-		SpawnBrickAtPosition(7);
+		SpawnAtPosition(-7);
+		SpawnAtPosition(-5);
+		SpawnAtPosition(-3);
+		SpawnAtPosition(-1);
+		SpawnAtPosition(1);
+		SpawnAtPosition(3);
+		SpawnAtPosition(5);
+		SpawnAtPosition(7);
 	}
 
-	void SpawnBrickAtPosition (float xPos)
+	void SpawnAtPosition (float xPos)
 	{
 		Vector2 position = new Vector2(xPos, 10f);
-		Instantiate(brickPrefab, position, transform.rotation);
+		GameObject obj = GetSpawnObject();
+		Instantiate(obj, position, transform.rotation);
+	}
+
+	GameObject GetSpawnObject ()
+	{
+		int brickRoll = Random.Range(0, 30);
+		if (brickRoll < 28)
+		{
+			return brickPrefab;
+		}
+		else
+		{
+			return toughBrickPrefab;
+		}
 	}
 }
