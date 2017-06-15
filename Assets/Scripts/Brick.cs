@@ -6,11 +6,14 @@ public class Brick : MonoBehaviour {
 
 	// SYSTEM //
 
+	GameController gameController;
+
 	void Start ()
 	{
+		gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+		audioSource = GetComponent<AudioSource>();
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
-		audioSource = GetComponent<AudioSource>();
 		RandomizeGravityScale();
 	}
 
@@ -29,10 +32,10 @@ public class Brick : MonoBehaviour {
 
 	IEnumerator PopRoutine ()
 	{
-		GetComponent<Collider2D>().enabled = false;
-		anim.SetTrigger("Pop");
 		PlayPopAudio();
-		GameObject.FindWithTag("GameController").GetComponent<GameController>().ReceiveScorePoint(1);
+		anim.SetTrigger("Pop");
+		if (gameController != null) { gameController.ReceiveScorePoint(1); }
+		GetComponent<Collider2D>().enabled = false;
 		yield return new WaitForSeconds(popDelay);
 		Destroy(gameObject);
 	}
@@ -77,11 +80,7 @@ public class Brick : MonoBehaviour {
 		{
 			rb.velocity = Vector2.zero;
 			StartCoroutine(PopRoutine());
-			
-			if (GameObject.FindWithTag("GameController") != null)
-			{
-				GameObject.FindWithTag("GameController").GetComponent<GameController>().LoseLife
-			}
+			if (gameController != null) { gameController.LoseLife(); }
 		}
 
 		if (obj.tag == "TopBoundary")
