@@ -15,6 +15,7 @@ public class MenuController : MonoBehaviour {
 	void Update ()
 	{
 		UpdateInsertCoin();
+		UpdateEscInput();
 	}
 
 	// INPUT //
@@ -24,6 +25,14 @@ public class MenuController : MonoBehaviour {
 		if (Input.GetButtonDown("Submit"))
 		{
 			StartCoroutine(InsertCoinRoutine());
+		}
+	}
+
+	void UpdateEscInput ()
+	{
+		if (Input.GetButtonDown("Cancel"))
+		{
+			Application.Quit();
 		}
 	}
 

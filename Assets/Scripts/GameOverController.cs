@@ -10,6 +10,8 @@ public class GameOverController : MonoBehaviour {
 
 	void Update ()
 	{
+		UpdateEscInput();
+
 		if (gameIsOver)
 		{
 			UpdateHorizontalInput();
@@ -24,16 +26,26 @@ public class GameOverController : MonoBehaviour {
 
 	public void InitGameOver ()
 	{
+		GetComponent<AudioSource>().Play();
 		GetComponent<Animator>().SetTrigger("GameOver");
 		gameIsOver = true;
 	}
 
-	// ENTER INPUT //
+	// ENTER AND ESC INPUT //
+
 	void UpdateEnterInput ()
 	{
 		if (Input.GetButtonDown("Submit") && selectorIndex == 3)
 		{
 			SceneManager.LoadScene("Menu");
+		}
+	}
+
+	void UpdateEscInput ()
+	{
+		if (Input.GetButtonDown("Cancel"))
+		{
+			Application.Quit();
 		}
 	}
 

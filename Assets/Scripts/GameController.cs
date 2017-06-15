@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour {
 	{
 		if (lifeCount < 0)
 		{
-			GameOver();
+			StartCoroutine(GameOverRoutine());
 		}
 	}
 
@@ -67,9 +67,11 @@ public class GameController : MonoBehaviour {
 
 	// GAME OVER //
 
-	void GameOver ()
+	IEnumerator GameOverRoutine ()
 	{
+		GameObject.FindWithTag("Background").GetComponent<Animator>().SetTrigger("Death");
 		GameObject.FindWithTag("GameOverController").GetComponent<GameOverController>().InitGameOver();
+		yield return new WaitForSeconds(0.5f);
 		Destroy(gameObject);
 	}
 }
