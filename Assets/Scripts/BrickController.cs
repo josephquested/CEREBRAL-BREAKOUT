@@ -11,15 +11,11 @@ public class BrickController : MonoBehaviour {
 		StartCoroutine(SpawnRoutine());
 	}
 
-	void Update ()
-	{
-
-	}
-
 	// SPAWNING //
 
 	public GameObject brickPrefab;
 	public GameObject toughBrickPrefab;
+	public GameObject bangBrickPrefab;
 	public float spawnDelay;
 
 	IEnumerator SpawnRoutine ()
@@ -50,14 +46,14 @@ public class BrickController : MonoBehaviour {
 
 	GameObject GetSpawnObject ()
 	{
-		int brickRoll = Random.Range(0, 30);
-		if (brickRoll < 28)
+		if (Random.Range(0, 30) < 28)
 		{
 			return brickPrefab;
 		}
 		else
 		{
-			return toughBrickPrefab;
+			if (Random.Range(0, 4) < 2) return toughBrickPrefab;
+			else return bangBrickPrefab;
 		}
 	}
 }
