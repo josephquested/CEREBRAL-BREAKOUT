@@ -60,7 +60,7 @@ public class Brick : MonoBehaviour {
 
 	// MOVEMENT //
 
-	Rigidbody2D rb;
+	protected Rigidbody2D rb;
 
 	public float gravityMin;
 	public float gravityMax;

@@ -108,6 +108,7 @@
      <Compile Include="Assets\Packages\ProCamera2D\Code\Triggers\ProCamera2DTriggerZoom.cs" />
      <Compile Include="Assets\Packages\ProCamera2D\ProCamera2D.cs" />
      <Compile Include="Assets\Scripts\Ball.cs" />
+     <Compile Include="Assets\Scripts\BangBrick.cs" />
      <Compile Include="Assets\Scripts\Brick.cs" />
      <Compile Include="Assets\Scripts\BrickController.cs" />
      <Compile Include="Assets\Scripts\Explode.cs" />
