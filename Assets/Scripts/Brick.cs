@@ -76,7 +76,7 @@ public class Brick : MonoBehaviour {
   {
 		GameObject obj = collision.gameObject;
 
-		if (obj.tag == "BottomBoundary")
+		if (obj.tag == "BottomBoundary" || obj.tag == "Paddle")
 		{
 			rb.velocity = Vector2.zero;
 			StartCoroutine(PopRoutine());

@@ -38,6 +38,17 @@ public class ToughBrick : Brick {
 
   public override void OnCollisionEnter2D (Collision2D collision)
   {
+		if (collision.gameObject.tag == "Paddle")
+		{
+			rb.velocity = Vector2.zero;
+			StartCoroutine(PopRoutine());
+			if (gameController != null) { gameController.LoseLife(); }
+			StartCoroutine(PopRoutine());
+			if (gameController != null) { gameController.LoseLife(); }
+			StartCoroutine(PopRoutine());
+			if (gameController != null) { gameController.LoseLife(); }
+		}
+
 		if (collision.gameObject.tag == "TopBoundary")
     {
       Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
