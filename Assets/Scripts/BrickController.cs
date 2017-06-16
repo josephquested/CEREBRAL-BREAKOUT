@@ -19,6 +19,7 @@ public class BrickController : MonoBehaviour {
 	public GameObject brickPrefab;
 	public GameObject toughBrickPrefab;
 	public GameObject bangBrickPrefab;
+	public GameObject ghostBrickPrefab;
 
 	public float spawnDelay;
 	public float specialbrickSpawnDelay;
@@ -46,11 +47,11 @@ public class BrickController : MonoBehaviour {
 	void SpawnAtPosition (float xPos)
 	{
 		Vector2 position = new Vector2(xPos, 10f);
-		GameObject obj = GetSpawnObject();
+		GameObject obj = GetBrickObject();
 		Instantiate(obj, position, transform.rotation);
 	}
 
-	GameObject GetSpawnObject ()
+	GameObject GetBrickObject ()
 	{
 		if (Random.Range(0, 30) > specialBrickLikelyhood || !canSpawnSpecialBricks)
 		{
@@ -58,8 +59,17 @@ public class BrickController : MonoBehaviour {
 		}
 		else
 		{
-			if (Random.Range(0, 10) > 3) return toughBrickPrefab;
-			else return bangBrickPrefab;
+			return GetSpecialBrickObject();
+		}
+	}
+
+	GameObject GetSpecialBrickObject ()
+	{
+		if (Random.Range(0, 10) > 3) return toughBrickPrefab;
+		else
+		{
+			if (Random.Range(0, 10) > 3) return bangBrickPrefab;
+			else return ghostBrickPrefab;
 		}
 	}
 
