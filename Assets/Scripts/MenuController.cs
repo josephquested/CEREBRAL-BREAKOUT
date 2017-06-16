@@ -10,6 +10,7 @@ public class MenuController : MonoBehaviour {
 
 	void Awake ()
 	{
+		Cursor.visible = false;
 		SetHighscoreField();
 	}
 
