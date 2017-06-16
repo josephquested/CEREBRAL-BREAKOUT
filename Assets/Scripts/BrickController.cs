@@ -9,14 +9,18 @@ public class BrickController : MonoBehaviour {
 	void Start ()
 	{
 		StartCoroutine(SpawnRoutine());
+		StartCoroutine(SpecialBrickDelayCoroutine());
 	}
 
 	// SPAWNING //
+
+	bool canSpawnSpecialBricks;
 
 	public GameObject brickPrefab;
 	public GameObject toughBrickPrefab;
 	public GameObject bangBrickPrefab;
 	public float spawnDelay;
+	public float specialbrickSpawnDelay;
 
 	IEnumerator SpawnRoutine ()
 	{
@@ -46,7 +50,7 @@ public class BrickController : MonoBehaviour {
 
 	GameObject GetSpawnObject ()
 	{
-		if (Random.Range(0, 30) < 28)
+		if (Random.Range(0, 30) < 28 || !canSpawnSpecialBricks)
 		{
 			return brickPrefab;
 		}
@@ -55,5 +59,12 @@ public class BrickController : MonoBehaviour {
 			if (Random.Range(0, 4) < 2) return toughBrickPrefab;
 			else return bangBrickPrefab;
 		}
+	}
+
+	IEnumerator SpecialBrickDelayCoroutine ()
+	{
+		yield return new WaitForSeconds(specialbrickSpawnDelay);
+		print("can spawn");
+		canSpawnSpecialBricks = true;
 	}
 }

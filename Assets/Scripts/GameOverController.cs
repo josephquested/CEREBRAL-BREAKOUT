@@ -68,7 +68,7 @@ public class GameOverController : MonoBehaviour {
 	{
 		if (Input.GetButtonDown("Cancel"))
 		{
-			Application.Quit();
+			SceneManager.LoadScene("Menu");
 		}
 	}
 
