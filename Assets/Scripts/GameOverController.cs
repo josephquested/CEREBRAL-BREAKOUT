@@ -35,19 +35,26 @@ public class GameOverController : MonoBehaviour {
 	{
 		GetComponent<AudioSource>().Play();
 		GetComponent<Animator>().SetTrigger("GameOver");
+		if (IsNewBest()) newBestTextObject.SetActive(true);
 		gameIsOver = true;
 	}
 
 	// HIGH SCORE //
 
 	public Text finalScoreField;
+	public GameObject newBestTextObject;
+
+	bool IsNewBest ()
+	{
+		return Convert.ToInt32(finalScoreField.text) > PlayerPrefs.GetInt("High Score");
+	}
 
 	void SaveHighScore ()
 	{
 		int finalScore = Convert.ToInt32(finalScoreField.text);
 		int oldHighscore = PlayerPrefs.GetInt("High Score");
 
-		if (finalScore >= oldHighscore)
+		if (finalScore > oldHighscore)
 		{
 			PlayerPrefs.SetInt("High Score", finalScore);
 			PlayerPrefs.SetString("Player Name", nameFields[0].text + nameFields[1].text + nameFields[2].text);
