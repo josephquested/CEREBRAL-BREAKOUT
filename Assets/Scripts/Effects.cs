@@ -25,6 +25,13 @@ public class Effects : MonoBehaviour {
 		backgroundAnim.SetTrigger("Flash");
 	}
 
+	public void BigHit ()
+	{
+		audioSource.Play();
+		ProCamera2DShake.Instance.Shake("LargeExplosion");
+		backgroundAnim.SetTrigger("LongFlash");
+	}
+
 	public void Death ()
 	{
 		audioSource.Play();
