@@ -32,6 +32,7 @@ public class BangBrick : Brick {
 			rb.velocity = Vector2.zero;
 			StartCoroutine(PopRoutine());
 			GameObject.FindWithTag("Effects").GetComponent<Effects>().BigHit();
+
 			if (gameController != null) { gameController.LoseLife(); }
 			if (gameController != null) { gameController.LoseLife(); }
 			if (gameController != null) { gameController.LoseLife(); }

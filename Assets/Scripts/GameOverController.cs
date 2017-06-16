@@ -23,6 +23,7 @@ public class GameOverController : MonoBehaviour {
 			UpdateHorizontalInput();
 			UpdateVerticalInput();
 			UpdateEnterInput();
+			UpdateInputAudio();
 		}
 	}
 
@@ -181,5 +182,33 @@ public class GameOverController : MonoBehaviour {
 	void ChangeSelectedChar ()
 	{
 		nameFields[selectorIndex].text = chars[charIndexes[selectorIndex]];
+	}
+
+	// AUDIO //
+
+	public AudioSource inputAudio;
+	public AudioClip verticalInputClip;
+	public AudioClip horizontalInputClip;
+	public AudioClip submitInputClip;
+
+	void UpdateInputAudio ()
+	{
+		if (Input.GetButtonDown("Vertical"))
+		{
+			inputAudio.pitch = UnityEngine.Random.Range(1f, 2f);
+			inputAudio.clip = verticalInputClip;
+			inputAudio.Play();
+		}
+		if (Input.GetButtonDown("Horizontal"))
+		{
+			inputAudio.pitch = UnityEngine.Random.Range(0.8f, 1f);
+			inputAudio.clip = horizontalInputClip;
+			inputAudio.Play();
+		}
+		if (Input.GetButtonDown("Submit") && selectorIndex == 3)
+		{
+			inputAudio.clip = submitInputClip;
+			inputAudio.Play();
+		}
 	}
 }
