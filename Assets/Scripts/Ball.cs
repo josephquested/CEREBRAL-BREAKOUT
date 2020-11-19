@@ -29,7 +29,7 @@ public class Ball : MonoBehaviour {
 	bool canPop;
 	public float popDelay;
 
-	IEnumerator PopRoutine ()
+	public IEnumerator PopRoutine ()
 	{
 		canPop = false;
 		GetComponent<Collider2D>().enabled = false;

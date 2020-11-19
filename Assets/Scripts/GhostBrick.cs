@@ -32,8 +32,8 @@ public class GhostBrick : Brick {
 		}
 
 		if (obj.tag == "Ball")
-    {
-      StartCoroutine(PopRoutine());
-    }
+		{
+			StartCoroutine(PopRoutine());
+		}
   }
 }
