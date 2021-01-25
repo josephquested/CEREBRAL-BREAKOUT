@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Com.LuisPedroFonseca.ProCamera2D;
 
 public class Lava : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class Lava : MonoBehaviour
 
 		if (obj.tag == "BottomBoundary")
 		{
+			ProCamera2DShake.Instance.Shake("SmallExplosion");
 			Instantiate(smokePrefab, transform.position, transform.rotation);
 			Destroy(gameObject);
 		}

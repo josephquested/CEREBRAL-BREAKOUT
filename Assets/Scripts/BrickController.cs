@@ -21,10 +21,12 @@ public class BrickController : MonoBehaviour {
 	public GameObject bangBrickPrefab;
 	public GameObject ghostBrickPrefab;
 	public GameObject speedBrickPrefab;
+	public GameObject lavaBrickPrefab;
 
 	public float spawnDelay;
 	public float specialbrickSpawnDelay;
 	public float specialBrickLikelyhood;
+	public float spawnDelayIncrease;
 
 	IEnumerator SpawnRoutine ()
 	{
@@ -72,8 +74,12 @@ public class BrickController : MonoBehaviour {
 			if (Random.Range(0, 10) > 3) return bangBrickPrefab;
 			else
 			{
-				if (Random.Range(0, 10) > 5) return speedBrickPrefab;
-				else return ghostBrickPrefab;
+				if (Random.Range(0, 10) > 5) return ghostBrickPrefab;
+				else
+				{
+					if (Random.Range(0, 10) > 5) return speedBrickPrefab;
+					else return lavaBrickPrefab;
+				}
 			}
 		}
 	}
@@ -90,6 +96,11 @@ public class BrickController : MonoBehaviour {
 	IEnumerator IncreaseSpecialBrickLikelyhoodRoutine ()
 	{
 		yield return new WaitForSeconds(increaseSpecialLikelyhoodDelay);
+		spawnDelay -= spawnDelayIncrease;
+
+		if (spawnDelay <= 4)
+			spawnDelay = 4;
+
 		specialBrickLikelyhood += 1;
 		StartCoroutine(IncreaseSpecialBrickLikelyhoodRoutine());
 	}

@@ -22,10 +22,18 @@ public class MenuController : MonoBehaviour {
 
 	// INPUT //
 
+	public Text enterText;
+
+	void SetLoadingText()
+	{
+		enterText.text = "LOADING";
+	}
+
 	void UpdateInsertCoin ()
 	{
 		if (Input.GetButtonDown("Submit"))
 		{
+			SetLoadingText();
 			StartCoroutine(InsertCoinRoutine());
 		}
 	}

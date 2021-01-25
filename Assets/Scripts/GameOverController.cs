@@ -70,6 +70,12 @@ public class GameOverController : MonoBehaviour {
 			SaveHighScore();
 			SceneManager.LoadScene("Menu");
 		}
+
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			SaveHighScore();
+			Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+		}
 	}
 
 	void UpdateEscInput ()
